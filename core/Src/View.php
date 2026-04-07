@@ -18,23 +18,34 @@ class View
        $this->data = $data;
    }
 
-   //Ïîëíûé ïóòü äî äèðåêòîðèè ñ ïðåäñòàâëåíèÿìè
+   //ÐŸÐ¾Ð»Ð½Ñ‹Ð¹ Ð¿ÑƒÑ‚ÑŒ Ð´Ð¾ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ð¸ Ñ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸ÑÐ¼Ð¸
    private function getRoot(): string
    {
        global $app;
        $root = $app->settings->getRootPath();
        $path = $app->settings->getViewsPath();
 
-       return $_SERVER['DOCUMENT_ROOT'] . $root . $path;
+       $docRoot = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\');
+       $fullPath = $docRoot . $root . $path;
+       if (is_dir($fullPath)) {
+           return $fullPath;
+       }
+
+       $fallbackPath = dirname($docRoot) . $path;
+       if (is_dir($fallbackPath)) {
+           return $fallbackPath;
+       }
+
+       return $fullPath;
    }
 
-   //Ïóòü äî îñíîâíîãî ôàéëà ñ øàáëîíîì ñàéòà
+   //ÐŸÑƒÑ‚ÑŒ Ð´Ð¾ Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð° Ñ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð¼ ÑÐ°Ð¹Ñ‚Ð°
    private function getPathToMain(): string
    {
        return $this->root . $this->layout;
    }
 
-   //Ïóòü äî òåêóùåãî øàáëîíà
+   //ÐŸÑƒÑ‚ÑŒ Ð´Ð¾ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð°
    private function getPathToView(string $view = ''): string
    {
        $view = str_replace('.', '/', $view);
@@ -47,16 +58,16 @@ class View
 
        if (file_exists($this->getPathToMain()) && file_exists($path)) {
 
-           //Èìïîðòèðóåò ïåðåìåííûå èç ìàññèâà â òåêóùóþ òàáëèöó ñèìâîëîâ
+           //Ð˜Ð¼Ð¿Ð¾Ñ€Ñ‚Ð¸Ñ€ÑƒÐµÑ‚ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð² Ñ‚ÐµÐºÑƒÑ‰ÑƒÑŽ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñƒ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð²
            extract($data, EXTR_PREFIX_SAME, '');
 
-           //Âêëþ÷åíèå áóôåðèçàöèè âûâîäà
+           //Ð’ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ð±ÑƒÑ„ÐµÑ€Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð²Ñ‹Ð²Ð¾Ð´Ð°
            ob_start();
            require $path;
-           //Ïîìåùàåì áóôåð â ïåðåìåííóþ è î÷èùàåì åãî
+           //ÐŸÐ¾Ð¼ÐµÑ‰Ð°ÐµÐ¼ Ð±ÑƒÑ„ÐµÑ€ Ð² Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½ÑƒÑŽ Ð¸ Ð¾Ñ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÐµÐ³Ð¾
            $content = ob_get_clean();
 
-           //Âîçâðàùàåì ñîáðàííóþ ñòðàíèöó
+           //Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼ ÑÐ¾Ð±Ñ€Ð°Ð½Ð½ÑƒÑŽ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñƒ
            return require($this->getPathToMain());
        }
        throw new Exception('Error render');
