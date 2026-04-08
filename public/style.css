@@ -1,0 +1,101 @@
+:root {
+    --bg: #f4f6f8;
+    --text: #1b2733;
+    --muted: #5e6b77;
+    --line: #d4dbe2;
+    --accent: #0f6cbf;
+    --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: linear-gradient(180deg, #eef3f8 0%, #f9fbfd 100%);
+    color: var(--text);
+}
+
+.topbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+}
+
+.nav {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 12px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    text-decoration: none;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.muted {
+    color: var(--muted);
+    margin-left: auto;
+}
+
+.container {
+    max-width: 1080px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.narrow {
+    max-width: 480px;
+}
+
+.form {
+    display: grid;
+    gap: 12px;
+}
+
+.form label {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+}
+
+input, select, button {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    font-size: 15px;
+}
+
+button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.alert {
+    padding: 10px;
+    border: 1px solid #f1c6c6;
+    background: #fff2f2;
+    border-radius: 8px;
+    color: #8f2e2e;
+}
