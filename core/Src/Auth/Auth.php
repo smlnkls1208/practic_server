@@ -3,7 +3,6 @@
 namespace Src\Auth;
 
 use Src\Session;
-use Throwable;
 
 class Auth
 {
@@ -26,13 +25,9 @@ class Auth
 
     public static function attempt(array $credentials): bool
     {
-        try {
-            if ($user = self::$user->attemptIdentity($credentials)) {
-                self::login($user);
-                return true;
-            }
-        } catch (Throwable $exception) {
-            return false;
+        if ($user = self::$user->attemptIdentity($credentials)) {
+            self::login($user);
+            return true;
         }
 
         return false;
@@ -41,11 +36,7 @@ class Auth
     public static function user()
     {
         $id = Session::get('id') ?? 0;
-        try {
-            return self::$user->findIdentity((int)$id);
-        } catch (Throwable $exception) {
-            return null;
-        }
+        return self::$user->findIdentity((int)$id);
     }
 
     public static function check(): bool
