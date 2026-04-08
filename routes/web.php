@@ -13,10 +13,10 @@ Route::add(['GET', 'POST'], '/employees/create', [Controller\Site::class, 'creat
     ->middleware('auth', 'role:admin');
 
 Route::add('GET', '/patients', [Controller\Site::class, 'patientsPage'])
-    ->middleware('auth', 'role:admin,registry');
+    ->middleware('auth', 'role:admin,employee');
 Route::add('GET', '/doctors', [Controller\Site::class, 'doctorsPage'])
-    ->middleware('auth', 'role:admin,registry');
+    ->middleware('auth', 'role:admin,employee');
 Route::add('GET', '/appointments', [Controller\Site::class, 'appointmentsPage'])
-    ->middleware('auth', 'role:admin,registry');
+    ->middleware('auth', 'role:admin,employee');
 Route::add('GET', '/reports', [Controller\Site::class, 'reportsPage'])
-    ->middleware('auth', 'role:admin,registry');
+    ->middleware('auth', 'role:admin,employee');
