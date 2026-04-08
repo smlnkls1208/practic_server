@@ -43,7 +43,14 @@ class Middleware
                 continue;
             }
 
-            (new $routeMiddleware[$name])->handle($request, $argument);
+            $middlewareObject = new $routeMiddleware[$name];
+
+            if ($argument === null) {
+                $middlewareObject->handle($request);
+                continue;
+            }
+
+            $middlewareObject->handle($request, $argument);
         }
 
         return $request;

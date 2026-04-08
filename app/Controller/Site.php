@@ -6,7 +6,6 @@ use Model\Role;
 use Model\User;
 use Src\Auth\Auth;
 use Src\Request;
-use Src\Session;
 use Src\View;
 
 class Site
@@ -24,7 +23,7 @@ class Site
     public function login(Request $request): string
     {
         if ($request->method === 'GET') {
-            return new View('site.login', ['message' => Session::flash('message')]);
+            return new View('site.login');
         }
 
         $login = trim((string)$request->get('login', ''));
@@ -44,7 +43,6 @@ class Site
     public function logout(Request $request): void
     {
         Auth::logout();
-        Session::flash('message', 'Вы вышли из системы');
         app()->route->redirect('/login');
     }
 
@@ -53,10 +51,7 @@ class Site
         $roles = Role::orderBy('id')->get();
 
         if ($request->method === 'GET') {
-            return new View('site.employee-create', [
-                'roles' => $roles,
-                'message' => Session::flash('message'),
-            ]);
+            return new View('site.employee-create', ['roles' => $roles]);
         }
 
         $login = trim((string)$request->get('login', ''));
@@ -83,8 +78,10 @@ class Site
             'role_id' => $roleId,
         ]);
 
-        Session::flash('message', 'Сотрудник успешно добавлен');
-        app()->route->redirect('/employees/create');
+        return new View('site.employee-create', [
+            'roles' => $roles,
+            'message' => 'Сотрудник успешно добавлен',
+        ]);
     }
 
     public function patientsPage(Request $request): string
