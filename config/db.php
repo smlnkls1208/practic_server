@@ -1,7 +1,7 @@
 <?php
 return [
     'driver' => 'mysql',
-    'host' => 'localhost',
+    'host' => '127.127.126.16',
     'database' => 'clinic',
     'username' => 'root',
     'password' => '',
