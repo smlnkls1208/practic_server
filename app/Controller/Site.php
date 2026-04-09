@@ -15,11 +15,6 @@ class Site
         return new View('site.dashboard');
     }
 
-    public function forbidden(Request $request): string
-    {
-        return new View('site.forbidden');
-    }
-
     public function login(Request $request): string
     {
         if ($request->method === 'GET') {

@@ -7,7 +7,6 @@ Route::add('GET', '/dashboard', [Controller\Site::class, 'home'])->middleware('a
 
 Route::add(['GET', 'POST'], '/login', [Controller\Site::class, 'login']);
 Route::add('GET', '/logout', [Controller\Site::class, 'logout'])->middleware('auth');
-Route::add('GET', '/forbidden', [Controller\Site::class, 'forbidden']);
 
 Route::add(['GET', 'POST'], '/employees/create', [Controller\Site::class, 'createEmployee'])
     ->middleware('auth', 'role:admin');

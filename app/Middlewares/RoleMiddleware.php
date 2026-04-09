@@ -21,7 +21,7 @@ class RoleMiddleware
         $currentRole = Auth::user()?->role?->name;
 
         if (!$currentRole || !in_array($currentRole, $allowedRoles, true)) {
-            app()->route->redirect('/forbidden');
+            app()->route->redirect('/login');
         }
     }
 }
