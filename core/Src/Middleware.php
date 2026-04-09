@@ -24,7 +24,7 @@ class Middleware
         $this->middlewareCollector->addGroup($prefix, $callback);
     }
 
-    protected function __construct()
+    private function __construct()
     {
         $this->middlewareCollector = new RouteCollector(new Std(), new MarkBased());
     }

@@ -15,10 +15,11 @@ class User extends Model implements IdentityInterface
         'role_id',
     ];
 
-    protected static function booted(): void
+    protected static function booted()
     {
-        static::creating(function ($user) {
+        static::created(function ($user) {
             $user->password = md5($user->password);
+            $user->save();
         });
     }
 

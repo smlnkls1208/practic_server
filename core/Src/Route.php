@@ -18,7 +18,7 @@ class Route
     private string $prefix = '';
     private RouteCollector $routeCollector;
 
-    protected function __construct()
+    private function __construct()
     {
         $this->routeCollector = new RouteCollector(new Std(), new MarkBased());
     }
