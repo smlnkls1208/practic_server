@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поликлиника</title>
-    <link rel="stylesheet" href="<?= app()->route->getUrl('/style.css') ?>">
+    <link rel="stylesheet" href="<?= app()->route->getUrl('/style.css?v=' . filemtime(__DIR__ . '/../../public/style.css')) ?>">
 </head>
 <body>
 <header class="topbar">
