@@ -292,6 +292,12 @@ select:focus {
     color: #9b3535;
 }
 
+.alert-success {
+    border-color: #b8d7bf;
+    background: #f1faf3;
+    color: #2f6b3f;
+}
+
 @media (max-width: 860px) {
     .two-columns,
     .filter-grid {

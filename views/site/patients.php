@@ -1,7 +1,5 @@
 <section class="section-heading">
-    <span class="section-kicker">Раздел сотрудника</span>
     <h1>Пациенты</h1>
-    <p>Таблица отображает существующих пациентов. Ниже расположена форма для добавления новой записи.</p>
 </section>
 
 <section class="panel">
@@ -20,20 +18,20 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach (($patients ?? []) as $patient): ?>
                 <tr>
-                    <td><?= (int)$patient->id ?></td>
-                    <td><?= htmlspecialchars($patient->surname) ?></td>
-                    <td><?= htmlspecialchars($patient->name) ?></td>
-                    <td><?= htmlspecialchars($patient->patronym ?? '') ?></td>
-                    <td><?= htmlspecialchars($patient->birth_date) ?></td>
+                    <td>1</td>
+                    <td>Иванов</td>
+                    <td>Иван</td>
+                    <td>Иванович</td>
+                    <td>1998-05-14</td>
                 </tr>
-            <?php endforeach; ?>
-            <?php if (empty($patients) || count($patients) === 0): ?>
-                <tr>
-                    <td colspan="5" class="empty-cell">Пациенты еще не добавлены.</td>
-                </tr>
-            <?php endif; ?>
+            <tr>
+                <td>2</td>
+                <td>Петрова</td>
+                <td>Анна</td>
+                <td>Сергеевна</td>
+                <td>2001-11-02</td>
+            </tr>
             </tbody>
         </table>
     </div>

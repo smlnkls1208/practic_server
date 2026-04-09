@@ -1,7 +1,5 @@
 <section class="section-heading">
-    <span class="section-kicker">Раздел сотрудника</span>
     <h1>Врачи</h1>
-    <p>На странице показаны все врачи из базы данных и форма добавления нового специалиста.</p>
 </section>
 
 <section class="panel">
@@ -20,20 +18,20 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach (($doctors ?? []) as $doctor): ?>
                 <tr>
-                    <td><?= (int)$doctor->id ?></td>
-                    <td><?= htmlspecialchars(trim($doctor->surname . ' ' . $doctor->name . ' ' . ($doctor->patronym ?? ''))) ?></td>
-                    <td><?= htmlspecialchars($doctor->position_name ?? '') ?></td>
-                    <td><?= htmlspecialchars($doctor->specialization_name ?? '') ?></td>
-                    <td><?= htmlspecialchars($doctor->birth_date) ?></td>
+                    <td>1</td>
+                    <td>Смирнов Алексей Петрович</td>
+                    <td>Терапевт</td>
+                    <td>Общая терапия</td>
+                    <td>1980-03-18</td>
                 </tr>
-            <?php endforeach; ?>
-            <?php if (empty($doctors) || count($doctors) === 0): ?>
-                <tr>
-                    <td colspan="5" class="empty-cell">Врачи еще не добавлены.</td>
-                </tr>
-            <?php endif; ?>
+            <tr>
+                <td>2</td>
+                <td>Кузнецова Елена Викторовна</td>
+                <td>Педиатр</td>
+                <td>Педиатрия</td>
+                <td>1987-09-07</td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -64,18 +62,20 @@
             <span>Должность</span>
             <select>
                 <option value="">Выберите должность</option>
-                <?php foreach (($positions ?? []) as $position): ?>
-                    <option value="<?= (int)$position->id ?>"><?= htmlspecialchars($position->name) ?></option>
-                <?php endforeach; ?>
+                <option value="1">Терапевт</option>
+                <option value="2">Хирург</option>
+                <option value="3">Педиатр</option>
+                <option value="4">Кардиолог</option>
             </select>
         </label>
         <label>
             <span>Специализация</span>
             <select>
                 <option value="">Выберите специализацию</option>
-                <?php foreach (($specializations ?? []) as $specialization): ?>
-                    <option value="<?= (int)$specialization->id ?>"><?= htmlspecialchars($specialization->name) ?></option>
-                <?php endforeach; ?>
+                <option value="1">Общая терапия</option>
+                <option value="2">Хирургия</option>
+                <option value="3">Педиатрия</option>
+                <option value="4">Кардиология</option>
             </select>
         </label>
         <button type="button" class="full-width">Сохранить врача</button>

@@ -2,7 +2,6 @@
 
 namespace Controller;
 
-use Illuminate\Database\Capsule\Manager as DB;
 use Model\Role;
 use Model\User;
 use Src\Auth\Auth;
@@ -87,53 +86,16 @@ class Site
 
     public function patientsPage(Request $request): string
     {
-        return new View('site.patients', [
-            'patients' => DB::table('patients')->orderBy('id', 'desc')->get(),
-        ]);
+        return new View('site.patients');
     }
 
     public function doctorsPage(Request $request): string
     {
-        return new View('site.doctors', [
-            'doctors' => DB::table('doctors')
-                ->leftJoin('positions', 'positions.id', '=', 'doctors.position_id')
-                ->leftJoin('specializations', 'specializations.id', '=', 'doctors.specialization_id')
-                ->select(
-                    'doctors.id',
-                    'doctors.name',
-                    'doctors.surname',
-                    'doctors.patronym',
-                    'doctors.birth_date',
-                    'positions.name as position_name',
-                    'specializations.name as specialization_name'
-                )
-                ->orderBy('doctors.id', 'desc')
-                ->get(),
-            'positions' => DB::table('positions')->orderBy('name')->get(),
-            'specializations' => DB::table('specializations')->orderBy('name')->get(),
-        ]);
+        return new View('site.doctors');
     }
 
     public function appointmentsPage(Request $request): string
     {
-        return new View('site.appointments', [
-            'appointments' => DB::table('appointments')
-                ->leftJoin('patients', 'patients.id', '=', 'appointments.patient_id')
-                ->leftJoin('doctors', 'doctors.id', '=', 'appointments.doctor_id')
-                ->select(
-                    'appointments.id',
-                    'appointments.appointment_at',
-                    'patients.surname as patient_surname',
-                    'patients.name as patient_name',
-                    'patients.patronym as patient_patronym',
-                    'doctors.surname as doctor_surname',
-                    'doctors.name as doctor_name',
-                    'doctors.patronym as doctor_patronym'
-                )
-                ->orderBy('appointments.appointment_at', 'desc')
-                ->get(),
-            'patients' => DB::table('patients')->orderBy('surname')->orderBy('name')->get(),
-            'doctors' => DB::table('doctors')->orderBy('surname')->orderBy('name')->get(),
-        ]);
+        return new View('site.appointments');
     }
 }

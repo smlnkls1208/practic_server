@@ -1,8 +1,6 @@
 <section class="panel auth-panel">
     <div class="section-heading">
-        <span class="section-kicker">Доступ в систему</span>
         <h1>Авторизация</h1>
-        <p>Введите логин и пароль сотрудника, чтобы открыть рабочее пространство поликлиники.</p>
     </div>
     <?php if (!empty($message)): ?>
         <p class="alert"><?= htmlspecialchars($message) ?></p>

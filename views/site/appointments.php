@@ -1,7 +1,5 @@
 <section class="section-heading">
-    <span class="section-kicker">Раздел сотрудника</span>
     <h1>Записи к врачу</h1>
-    <p>Здесь собраны таблица записей, блок фильтрации и форма добавления новой записи пациента к врачу.</p>
 </section>
 
 <section class="panel filter-panel">
@@ -14,18 +12,16 @@
                 <span>Пациент</span>
                 <select>
                     <option value="">Все пациенты</option>
-                    <?php foreach (($patients ?? []) as $patient): ?>
-                        <option value="<?= (int)$patient->id ?>"><?= htmlspecialchars(trim($patient->surname . ' ' . $patient->name . ' ' . ($patient->patronym ?? ''))) ?></option>
-                    <?php endforeach; ?>
+                    <option value="1">Иванов Иван Иванович</option>
+                    <option value="2">Петрова Анна Сергеевна</option>
                 </select>
             </label>
             <label>
                 <span>Врач</span>
                 <select>
                     <option value="">Все врачи</option>
-                    <?php foreach (($doctors ?? []) as $doctor): ?>
-                        <option value="<?= (int)$doctor->id ?>"><?= htmlspecialchars(trim($doctor->surname . ' ' . $doctor->name . ' ' . ($doctor->patronym ?? ''))) ?></option>
-                    <?php endforeach; ?>
+                    <option value="1">Смирнов Алексей Петрович</option>
+                    <option value="2">Кузнецова Елена Викторовна</option>
                 </select>
             </label>
             <label>
@@ -50,20 +46,20 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach (($appointments ?? []) as $appointment): ?>
                 <tr>
-                    <td><?= (int)$appointment->id ?></td>
-                    <td><?= htmlspecialchars(trim(($appointment->patient_surname ?? '') . ' ' . ($appointment->patient_name ?? '') . ' ' . ($appointment->patient_patronym ?? ''))) ?></td>
-                    <td><?= htmlspecialchars(trim(($appointment->doctor_surname ?? '') . ' ' . ($appointment->doctor_name ?? '') . ' ' . ($appointment->doctor_patronym ?? ''))) ?></td>
-                    <td><?= htmlspecialchars($appointment->appointment_at) ?></td>
+                    <td>1</td>
+                    <td>Иванов Иван Иванович</td>
+                    <td>Смирнов Алексей Петрович</td>
+                    <td>2026-04-14 10:00</td>
                     <td><button type="button" class="danger-button">Отменить</button></td>
                 </tr>
-            <?php endforeach; ?>
-            <?php if (empty($appointments) || count($appointments) === 0): ?>
-                <tr>
-                    <td colspan="5" class="empty-cell">Записи пока отсутствуют.</td>
-                </tr>
-            <?php endif; ?>
+            <tr>
+                <td>2</td>
+                <td>Петрова Анна Сергеевна</td>
+                <td>Кузнецова Елена Викторовна</td>
+                <td>2026-04-14 12:30</td>
+                <td><button type="button" class="danger-button">Отменить</button></td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -78,18 +74,16 @@
             <span>Пациент</span>
             <select>
                 <option value="">Выберите пациента</option>
-                <?php foreach (($patients ?? []) as $patient): ?>
-                    <option value="<?= (int)$patient->id ?>"><?= htmlspecialchars(trim($patient->surname . ' ' . $patient->name . ' ' . ($patient->patronym ?? ''))) ?></option>
-                <?php endforeach; ?>
+                <option value="1">Иванов Иван Иванович</option>
+                <option value="2">Петрова Анна Сергеевна</option>
             </select>
         </label>
         <label class="full-width">
             <span>Врач</span>
             <select>
                 <option value="">Выберите врача</option>
-                <?php foreach (($doctors ?? []) as $doctor): ?>
-                    <option value="<?= (int)$doctor->id ?>"><?= htmlspecialchars(trim($doctor->surname . ' ' . $doctor->name . ' ' . ($doctor->patronym ?? ''))) ?></option>
-                <?php endforeach; ?>
+                <option value="1">Смирнов Алексей Петрович</option>
+                <option value="2">Кузнецова Елена Викторовна</option>
             </select>
         </label>
         <label class="full-width">

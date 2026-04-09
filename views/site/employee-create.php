@@ -1,7 +1,5 @@
 <section class="section-heading">
-    <span class="section-kicker">Администрирование</span>
     <h1>Сотрудники</h1>
-    <p>На странице доступен просмотр уже созданных учетных записей и форма добавления нового сотрудника регистратуры.</p>
 </section>
 
 <section class="panel">
@@ -40,7 +38,7 @@
         <h2>Добавить сотрудника</h2>
     </div>
     <?php if (!empty($message)): ?>
-        <p class="alert"><?= htmlspecialchars($message) ?></p>
+        <p class="alert<?= $message === 'Сотрудник успешно добавлен' ? ' alert-success' : '' ?>"><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
     <form method="post" class="stack-form two-columns">
         <label>
