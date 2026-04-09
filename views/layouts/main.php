@@ -8,23 +8,14 @@
 </head>
 <body>
 <header class="topbar">
-    <nav class="nav">
+    <div class="topbar-inner">
+        <a class="brand" href="<?= app()->route->getUrl('/dashboard') ?>">Поликлиника</a>
         <?php if (app()->auth::check()): ?>
-            <a href="<?= app()->route->getUrl('/dashboard') ?>">Главная</a>
-            <a href="<?= app()->route->getUrl('/patients') ?>">Пациенты</a>
-            <a href="<?= app()->route->getUrl('/doctors') ?>">Врачи</a>
-            <a href="<?= app()->route->getUrl('/appointments') ?>">Записи</a>
-            <?php if ((app()->auth::user()?->role?->name ?? '') === 'admin'): ?>
-                <a href="<?= app()->route->getUrl('/employees/create') ?>">Сотрудники</a>
-            <?php endif; ?>
-            <span class="muted">Пользователь: <?= app()->auth::user()?->login ?></span>
-            <a href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
-        <?php else: ?>
-            <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
+            <a class="logout-button" href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
         <?php endif; ?>
-    </nav>
+    </div>
 </header>
-<main class="container">
+<main class="page-shell">
     <?= $content ?? '' ?>
 </main>
 </body>
