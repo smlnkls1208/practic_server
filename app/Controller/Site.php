@@ -98,9 +98,4 @@ class Site
     {
         return new View('site.appointments');
     }
-
-    public function reportsPage(Request $request): string
-    {
-        return new View('site.reports');
-    }
 }

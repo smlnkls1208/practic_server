@@ -14,7 +14,6 @@
             <a href="<?= app()->route->getUrl('/patients') ?>">Пациенты</a>
             <a href="<?= app()->route->getUrl('/doctors') ?>">Врачи</a>
             <a href="<?= app()->route->getUrl('/appointments') ?>">Записи</a>
-            <a href="<?= app()->route->getUrl('/reports') ?>">Отчеты</a>
             <?php if ((app()->auth::user()?->role?->name ?? '') === 'admin'): ?>
                 <a href="<?= app()->route->getUrl('/employees/create') ?>">Сотрудники</a>
             <?php endif; ?>

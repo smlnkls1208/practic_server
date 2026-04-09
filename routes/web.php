@@ -18,5 +18,3 @@ Route::add('GET', '/doctors', [Controller\Site::class, 'doctorsPage'])
     ->middleware('auth', 'role:admin,employee');
 Route::add('GET', '/appointments', [Controller\Site::class, 'appointmentsPage'])
     ->middleware('auth', 'role:admin,employee');
-Route::add('GET', '/reports', [Controller\Site::class, 'reportsPage'])
-    ->middleware('auth', 'role:admin,employee');
