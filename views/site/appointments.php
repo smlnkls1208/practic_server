@@ -6,41 +6,37 @@
 
 <section class="panel filter-panel">
     <div class="panel-header">
-        <h2>Фильтрация</h2>
-    </div>
-    <div class="filter-grid">
-        <label>
-            <span>Пациент</span>
-            <select>
-                <option value="">Все пациенты</option>
-                <?php foreach (($patients ?? []) as $patient): ?>
-                    <option value="<?= (int)$patient->id ?>"><?= htmlspecialchars(trim($patient->surname . ' ' . $patient->name . ' ' . ($patient->patronym ?? ''))) ?></option>
-                <?php endforeach; ?>
-            </select>
-        </label>
-        <label>
-            <span>Врач</span>
-            <select>
-                <option value="">Все врачи</option>
-                <?php foreach (($doctors ?? []) as $doctor): ?>
-                    <option value="<?= (int)$doctor->id ?>"><?= htmlspecialchars(trim($doctor->surname . ' ' . $doctor->name . ' ' . ($doctor->patronym ?? ''))) ?></option>
-                <?php endforeach; ?>
-            </select>
-        </label>
-        <label>
-            <span>Дата приема</span>
-            <input type="date">
-        </label>
-        <div class="filter-actions">
-            <button type="button">Применить</button>
-            <button type="button" class="ghost-button">Сбросить</button>
-        </div>
-    </div>
-</section>
-
-<section class="panel">
-    <div class="panel-header">
         <h2>Текущие записи</h2>
+    </div>
+    <div class="table-toolbar">
+        <div class="filter-grid">
+            <label>
+                <span>Пациент</span>
+                <select>
+                    <option value="">Все пациенты</option>
+                    <?php foreach (($patients ?? []) as $patient): ?>
+                        <option value="<?= (int)$patient->id ?>"><?= htmlspecialchars(trim($patient->surname . ' ' . $patient->name . ' ' . ($patient->patronym ?? ''))) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
+            <label>
+                <span>Врач</span>
+                <select>
+                    <option value="">Все врачи</option>
+                    <?php foreach (($doctors ?? []) as $doctor): ?>
+                        <option value="<?= (int)$doctor->id ?>"><?= htmlspecialchars(trim($doctor->surname . ' ' . $doctor->name . ' ' . ($doctor->patronym ?? ''))) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
+            <label>
+                <span>Дата приема</span>
+                <input type="date">
+            </label>
+            <div class="filter-actions">
+                <button type="button">Применить</button>
+                <button type="button" class="ghost-button">Сбросить</button>
+            </div>
+        </div>
     </div>
     <div class="table-wrap">
         <table class="data-table">
