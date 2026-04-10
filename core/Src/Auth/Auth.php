@@ -47,6 +47,14 @@ class Auth
     public static function logout(): bool
     {
         Session::clear('id');
+        Session::clear('csrf_token');
         return true;
+    }
+
+    public static function generateCSRF(): string
+    {
+        $token = md5((string)time());
+        Session::set('csrf_token', $token);
+        return $token;
     }
 }
