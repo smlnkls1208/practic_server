@@ -235,13 +235,15 @@ button:hover {
 }
 
 .stack-form label,
-.filter-grid label {
+.filter-grid label,
+.search-form label {
     display: grid;
     gap: 8px;
 }
 
 .stack-form span,
-.filter-grid span {
+.filter-grid span,
+.search-form span {
     font-weight: 600;
 }
 
@@ -273,6 +275,13 @@ select:focus {
     align-items: end;
 }
 
+.search-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: end;
+}
+
 .filter-actions {
     display: flex;
     gap: 10px;
@@ -283,24 +292,16 @@ select:focus {
     gap: 16px;
 }
 
-.alert {
-    margin: 0;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 1px solid #efc5c5;
-    background: #fff3f3;
-    color: #9b3535;
-}
-
-.alert-success {
-    border-color: #b8d7bf;
-    background: #f1faf3;
-    color: #2f6b3f;
+.error-message {
+    margin: 0 0 4px;
+    font-size: 0.875rem;
+    color: #e74c3c;
 }
 
 @media (max-width: 860px) {
     .two-columns,
-    .filter-grid {
+    .filter-grid,
+    .search-form {
         grid-template-columns: 1fr;
     }
 

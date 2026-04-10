@@ -1,3 +1,4 @@
+<?php $csrf = app()->auth::generateCSRF(); ?>
 <section class="section-heading">
     <h1>Сотрудники</h1>
 </section>
@@ -16,14 +17,15 @@
             </tr>
             </thead>
             <tbody>
-            <?php foreach (($employees ?? []) as $employee): ?>
-                <tr>
-                    <td><?= (int)$employee->id ?></td>
-                    <td><?= htmlspecialchars($employee->login) ?></td>
-                    <td><?= htmlspecialchars($employee->role->name ?? '') ?></td>
-                </tr>
-            <?php endforeach; ?>
-            <?php if (empty($employees) || count($employees) === 0): ?>
+            <?php if (!empty($employees)): ?>
+                <?php foreach ($employees as $employee): ?>
+                    <tr>
+                        <td><?= $employee->id ?></td>
+                        <td><?= htmlspecialchars($employee->login, ENT_QUOTES, 'UTF-8', false) ?></td>
+                        <td><?= htmlspecialchars($employee->role->name ?? '', ENT_QUOTES, 'UTF-8', false) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
                     <td colspan="3" class="empty-cell">Записей пока нет.</td>
                 </tr>
@@ -37,27 +39,25 @@
     <div class="panel-header">
         <h2>Добавить сотрудника</h2>
     </div>
-    <?php if (!empty($message)): ?>
-        <p class="alert<?= $message === 'Сотрудник успешно добавлен' ? ' alert-success' : '' ?>"><?= htmlspecialchars($message) ?></p>
-    <?php endif; ?>
-    <form method="post" class="stack-form two-columns">
+    <form method="post" class="stack-form">
+        <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
+        <?php if (!empty($errors['form'])): ?>
+            <p class="error-message"><?= htmlspecialchars($errors['form'], ENT_QUOTES, 'UTF-8', false) ?></p>
+        <?php endif; ?>
         <label>
             <span>Логин</span>
-            <input type="text" name="login" required>
+            <?php if (!empty($errors['login'])): ?>
+                <p class="error-message"><?= htmlspecialchars($errors['login'], ENT_QUOTES, 'UTF-8', false) ?></p>
+            <?php endif; ?>
+            <input type="text" name="login" value="<?= htmlspecialchars($old['login'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>">
         </label>
         <label>
             <span>Пароль</span>
-            <input type="password" name="password" required>
+            <?php if (!empty($errors['password'])): ?>
+                <p class="error-message"><?= htmlspecialchars($errors['password'], ENT_QUOTES, 'UTF-8', false) ?></p>
+            <?php endif; ?>
+            <input type="password" name="password">
         </label>
-        <label class="full-width">
-            <span>Роль</span>
-            <select name="role_id" required>
-                <option value="">Выберите роль</option>
-                <?php foreach (($roles ?? []) as $role): ?>
-                    <option value="<?= (int)$role->id ?>"><?= htmlspecialchars($role->name) ?></option>
-                <?php endforeach; ?>
-            </select>
-        </label>
-        <button type="submit" class="full-width">Создать сотрудника</button>
+        <button type="submit">Создать сотрудника</button>
     </form>
 </section>
