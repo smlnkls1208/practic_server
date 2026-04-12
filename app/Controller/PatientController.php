@@ -4,13 +4,10 @@ namespace Controller;
 
 use Model\Patient;
 use Src\Request;
-use Src\Validator\Validator;
 use Src\View;
 
 class PatientController
 {
-    use ControllerHelper;
-
     public function index(Request $request): string
     {
         $search = trim((string)$request->get('search', ''));
@@ -26,23 +23,6 @@ class PatientController
         }
 
         if ($request->method === 'POST') {
-            $validator = new Validator($request->all(), [
-                'surname' => ['required'],
-                'name' => ['required'],
-                'birth_date' => ['required'],
-            ]);
-
-            $errors = $this->formatErrors($validator);
-
-            if (!empty($errors)) {
-                return new View('site.patients', [
-                    'patients' => $query->orderBy('surname')->orderBy('name')->get(),
-                    'search' => $search,
-                    'errors' => $errors,
-                    'old' => $request->all(),
-                ]);
-            }
-
             Patient::create([
                 'surname' => (string)$request->get('surname', ''),
                 'name' => (string)$request->get('name', ''),

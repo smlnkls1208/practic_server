@@ -59,14 +59,14 @@
             <?php if (!empty($errors['surname'])): ?>
                 <p class="error-message"><?= htmlspecialchars($errors['surname'], ENT_QUOTES, 'UTF-8', false) ?></p>
             <?php endif; ?>
-            <input type="text" name="surname" value="<?= htmlspecialchars($old['surname'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" placeholder="Иванов">
+            <input type="text" name="surname" value="<?= htmlspecialchars($old['surname'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" placeholder="Иванов" required>
         </label>
         <label>
             <span>Имя</span>
             <?php if (!empty($errors['name'])): ?>
                 <p class="error-message"><?= htmlspecialchars($errors['name'], ENT_QUOTES, 'UTF-8', false) ?></p>
             <?php endif; ?>
-            <input type="text" name="name" value="<?= htmlspecialchars($old['name'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" placeholder="Иван">
+            <input type="text" name="name" value="<?= htmlspecialchars($old['name'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" placeholder="Иван" required>
         </label>
         <label>
             <span>Отчество</span>
@@ -77,7 +77,7 @@
             <?php if (!empty($errors['birth_date'])): ?>
                 <p class="error-message"><?= htmlspecialchars($errors['birth_date'], ENT_QUOTES, 'UTF-8', false) ?></p>
             <?php endif; ?>
-            <input type="date" name="birth_date" value="<?= htmlspecialchars($old['birth_date'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>">
+            <input type="date" name="birth_date" value="<?= htmlspecialchars($old['birth_date'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" required>
         </label>
         <button type="submit" class="full-width">Сохранить пациента</button>
     </form>

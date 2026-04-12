@@ -59,14 +59,14 @@
             <?php if (!empty($errors['surname'])): ?>
                 <p class="error-message"><?= htmlspecialchars($errors['surname'], ENT_QUOTES, 'UTF-8', false) ?></p>
             <?php endif; ?>
-            <input type="text" name="surname" value="<?= htmlspecialchars($old['surname'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" placeholder="Петров">
+            <input type="text" name="surname" value="<?= htmlspecialchars($old['surname'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" placeholder="Петров" required>
         </label>
         <label>
             <span>Имя</span>
             <?php if (!empty($errors['name'])): ?>
                 <p class="error-message"><?= htmlspecialchars($errors['name'], ENT_QUOTES, 'UTF-8', false) ?></p>
             <?php endif; ?>
-            <input type="text" name="name" value="<?= htmlspecialchars($old['name'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" placeholder="Петр">
+            <input type="text" name="name" value="<?= htmlspecialchars($old['name'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" placeholder="Петр" required>
         </label>
         <label>
             <span>Отчество</span>
@@ -77,14 +77,14 @@
             <?php if (!empty($errors['birth_date'])): ?>
                 <p class="error-message"><?= htmlspecialchars($errors['birth_date'], ENT_QUOTES, 'UTF-8', false) ?></p>
             <?php endif; ?>
-            <input type="date" name="birth_date" value="<?= htmlspecialchars($old['birth_date'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>">
+            <input type="date" name="birth_date" value="<?= htmlspecialchars($old['birth_date'] ?? '', ENT_QUOTES, 'UTF-8', false) ?>" required>
         </label>
         <label>
             <span>Должность</span>
             <?php if (!empty($errors['position_id'])): ?>
                 <p class="error-message"><?= htmlspecialchars($errors['position_id'], ENT_QUOTES, 'UTF-8', false) ?></p>
             <?php endif; ?>
-            <select name="position_id">
+            <select name="position_id" required>
                 <option value="">Выберите должность</option>
                 <?php if (!empty($positions)): ?>
                     <?php foreach ($positions as $position): ?>
@@ -98,7 +98,7 @@
             <?php if (!empty($errors['specialization_id'])): ?>
                 <p class="error-message"><?= htmlspecialchars($errors['specialization_id'], ENT_QUOTES, 'UTF-8', false) ?></p>
             <?php endif; ?>
-            <select name="specialization_id">
+            <select name="specialization_id" required>
                 <option value="">Выберите специализацию</option>
                 <?php if (!empty($specializations)): ?>
                     <?php foreach ($specializations as $specialization): ?>

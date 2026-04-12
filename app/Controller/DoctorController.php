@@ -6,13 +6,10 @@ use Model\Doctor;
 use Model\Position;
 use Model\Specialization;
 use Src\Request;
-use Src\Validator\Validator;
 use Src\View;
 
 class DoctorController
 {
-    use ControllerHelper;
-
     public function index(Request $request): string
     {
         $search = trim((string)$request->get('search', ''));
@@ -34,27 +31,6 @@ class DoctorController
         }
 
         if ($request->method === 'POST') {
-            $validator = new Validator($request->all(), [
-                'surname' => ['required'],
-                'name' => ['required'],
-                'position_id' => ['required'],
-                'specialization_id' => ['required'],
-                'birth_date' => ['required'],
-            ]);
-
-            $errors = $this->formatErrors($validator);
-
-            if (!empty($errors)) {
-                return new View('site.doctors', [
-                    'doctors' => $query->orderBy('surname')->orderBy('name')->get(),
-                    'positions' => Position::query()->orderBy('name')->get(),
-                    'specializations' => Specialization::query()->orderBy('name')->get(),
-                    'search' => $search,
-                    'errors' => $errors,
-                    'old' => $request->all(),
-                ]);
-            }
-
             Doctor::create([
                 'surname' => (string)$request->get('surname', ''),
                 'name' => (string)$request->get('name', ''),
