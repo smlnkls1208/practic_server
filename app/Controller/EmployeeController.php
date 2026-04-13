@@ -16,6 +16,11 @@ class EmployeeController
             $validator = new Validator($request->all(), [
                 'login' => ['required', 'min:4', 'max:30', 'unique:users,login'],
                 'password' => ['required', 'min:4', 'max:50'],
+            ], [
+                'required' => 'Поле :field пусто',
+                'min' => 'Поле :field слишком короткое',
+                'max' => 'Поле :field слишком длинное',
+                'unique' => 'Поле :field должно быть уникально',
             ]);
 
             $errors = [];
