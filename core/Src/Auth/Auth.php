@@ -2,6 +2,7 @@
 
 namespace Src\Auth;
 
+use Src\Request;
 use Src\Session;
 
 class Auth
@@ -33,15 +34,32 @@ class Auth
         return false;
     }
 
-    public static function user()
+    public static function attemptToken(array $credentials): ?string
     {
+        $user = self::$user->attemptIdentity($credentials);
+
+        if (!$user || !method_exists($user, 'issueApiToken')) {
+            return null;
+        }
+
+        return $user->issueApiToken();
+    }
+
+    public static function user(?Request $request = null)
+    {
+        $token = $request?->bearerToken();
+
+        if ($token && method_exists(self::$user, 'findIdentityByToken')) {
+            return self::$user->findIdentityByToken($token);
+        }
+
         $id = Session::get('id') ?? 0;
         return self::$user->findIdentity((int)$id);
     }
 
-    public static function check(): bool
+    public static function check(?Request $request = null): bool
     {
-        return (bool)self::user();
+        return (bool)self::user($request);
     }
 
     public static function logout(): bool

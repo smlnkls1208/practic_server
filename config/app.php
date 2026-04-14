@@ -12,10 +12,12 @@ return [
     'routeMiddleware' => [
         'auth' => \Middlewares\AuthMiddleware::class,
         'role' => \Middlewares\RoleMiddleware::class,
+        'apiAuth' => \Middlewares\ApiAuthMiddleware::class,
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,
         'trim' => \Middlewares\TrimMiddleware::class,
+        'json' => \Middlewares\JSONMiddleware::class,
         'specialChars' => \Middlewares\SpecialCharsMiddleware::class,
     ],
     'validators' => [

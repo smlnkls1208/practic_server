@@ -23,6 +23,7 @@ abstract class ControllerTestCase extends TestCase
         $_SESSION = [];
         $_REQUEST = [];
         $_FILES = [];
+        unset($_SERVER['HTTP_AUTHORIZATION']);
         $_SERVER['DOCUMENT_ROOT'] = realpath(__DIR__ . '/../public');
         $_SERVER['REQUEST_METHOD'] = 'GET';
 
@@ -35,6 +36,10 @@ abstract class ControllerTestCase extends TestCase
 
     protected function tearDown(): void
     {
+        if (Capsule::schema()->hasColumn('users', 'token')) {
+            Capsule::table('users')->where('login', 'like', 'autotest_%')->update(['token' => null]);
+        }
+
         User::where('login', 'like', 'autotest_%')->delete();
         $_SESSION = [];
 

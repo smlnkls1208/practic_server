@@ -2,6 +2,7 @@
 
 namespace Model;
 
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Model;
 use Src\Auth\IdentityInterface;
 
@@ -13,6 +14,7 @@ class User extends Model implements IdentityInterface
         'login',
         'password',
         'role_id',
+        'token',
     ];
 
     protected static function booted()
@@ -44,5 +46,34 @@ class User extends Model implements IdentityInterface
             'login' => $credentials['login'] ?? '',
             'password' => md5($credentials['password'] ?? ''),
         ])->first();
+    }
+
+    public function findIdentityByToken(string $token)
+    {
+        self::ensureTokenColumn();
+
+        return self::with('role')->where('token', $token)->first();
+    }
+
+    public function issueApiToken(): string
+    {
+        self::ensureTokenColumn();
+
+        $token = bin2hex(random_bytes(32));
+        $this->token = $token;
+        $this->save();
+
+        return $token;
+    }
+
+    public static function ensureTokenColumn(): void
+    {
+        if (Capsule::schema()->hasColumn('users', 'token')) {
+            return;
+        }
+
+        Capsule::schema()->table('users', function ($table) {
+            $table->string('token', 120)->nullable()->after('password');
+        });
     }
 }

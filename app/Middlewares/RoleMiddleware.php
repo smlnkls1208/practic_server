@@ -9,7 +9,7 @@ class RoleMiddleware
 {
     public function handle(Request $request, ?string $rolesRaw = null): void
     {
-        if (!Auth::check()) {
+        if (!Auth::check($request)) {
             app()->route->redirect('/login');
         }
 
@@ -18,7 +18,7 @@ class RoleMiddleware
         }
 
         $allowedRoles = array_map('trim', explode(',', $rolesRaw));
-        $currentRole = Auth::user()?->role?->name;
+        $currentRole = Auth::user($request)?->role?->name;
 
         if (!$currentRole || !in_array($currentRole, $allowedRoles, true)) {
             app()->route->redirect('/login');

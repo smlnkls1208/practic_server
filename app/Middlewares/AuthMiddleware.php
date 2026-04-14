@@ -9,7 +9,7 @@ class AuthMiddleware
 {
     public function handle(Request $request): void
     {
-        if (!Auth::check()) {
+        if (!Auth::check($request)) {
             app()->route->redirect('/login');
         }
     }
