@@ -3,6 +3,12 @@
 return [
     'auth' => \Src\Auth\Auth::class,
     'identity' => \Model\User::class,
+    'providers' => [
+        'kernel' => \Providers\KernelProvider::class,
+        'route' => \Providers\RouteProvider::class,
+        'db' => \Providers\DBProvider::class,
+        'auth' => \Providers\AuthProvider::class,
+    ],
     'routeMiddleware' => [
         'auth' => \Middlewares\AuthMiddleware::class,
         'role' => \Middlewares\RoleMiddleware::class,
